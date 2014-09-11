@@ -8,6 +8,7 @@ sys.path.insert(0, base_dir)
 import setup
 import shutil
 import subprocess
+import time
 
 
 DEVELOPMENT = 'development'
@@ -33,6 +34,7 @@ def build_osx():
         ],
         cwd=os.path.join(base_dir, 'native/Projects/Xcode'))
 
+
 def build_windows():
     subprocess.call([
         'C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe',
@@ -49,6 +51,7 @@ def build_windows():
         ],
         cwd=os.path.join(base_dir, 'native/Projects/VisualStudio'))
 
+
 def copy_dir_files(src, dest):
     try:
         os.makedirs(dest)
@@ -61,10 +64,12 @@ def copy_dir_files(src, dest):
             pass
         shutil.copy2(os.path.join(src, file), os.path.join(dest, file))
 
+
 def publish_build_dirs(version, commit, dirs):
     print('Copying local build dirs to dropbox...')
     for dir in dirs:
         copy_dir_files(os.path.join(base_dir, dir), share_path + dir)
+
 
 def download_build_dirs(version, commit, alt_dirs):
     print('Copying alternative platform dirs from dropbox...')
@@ -75,11 +80,13 @@ def download_build_dirs(version, commit, alt_dirs):
         copy_dir_files(share_path + dir, os.path.join(base_dir, dir))
     return True
 
+
 def has_build_dirs(version, commit, dirs):
     for file in dirs:
         if not os.path.exists(share_path + file):
             return False
     return True
+
 
 def build():
     if sys.platform == 'win32':
@@ -89,9 +96,11 @@ def build():
     else:
         raise Exception('Unsupported platform %s' % sys.platform)
 
+
 def publish():
     print('Publishing to PyPI')
     subprocess.call(['python', 'setup.py', 'sdist', '--formats=zip', 'upload'], cwd=base_dir)
+
 
 def get_build_dirs():
     windows_dirs = ['bacon/windows32', 'bacon/windows64']
@@ -127,6 +136,7 @@ def get_master_commit(check_clean):
 def get_version():
     return setup.version
 
+
 def get_native_version():
     import re
     src = open(os.path.join(base_dir, 'native/Source/Bacon/Bacon.h'), 'r').read()
@@ -134,6 +144,7 @@ def get_native_version():
     minor = re.match('.*#define BACON_VERSION_MINOR ([0-9]+).*', src, re.DOTALL).groups(1)[0]
     patch = re.match('.*#define BACON_VERSION_PATCH ([0-9]+).*', src, re.DOTALL).groups(1)[0]
     return '%s.%s.%s' % (major, minor, patch)
+
 
 def tag(version):
     subprocess.call(['git', 'tag', '-a', 'v%s' % version, '-m', 'Release %s' % version], shell=True)
@@ -164,11 +175,14 @@ if __name__ == '__main__':
         )
 
     commit = get_master_commit(check_clean=args.mode == DIST)
+    # todo: get tid of this global variable in future
     share_path = os.path.join(dropbox_dir, 'bacon-%s/%s/' % (version, commit))
 
     print('Version %s' % version)
     print('Commit %s' % commit)
-    import time; time.sleep(1)
+
+    # note: not sure why it's here; todo: revise it in future
+    time.sleep(1)
 
     dirs, alt_dirs = get_build_dirs()
     if not has_build_dirs(version, commit, dirs) or args.mode == DEVELOPMENT:
