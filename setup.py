@@ -18,19 +18,19 @@ add_native_module('bacon/windows32', [
   'Bacon.dll',
   'libEGL.dll',
   'libGLESv2.dll',
-  'd3dcompiler_46.dll',
-  'msvcp110.dll',
-  'msvcr110.dll',
-  'vccorlib110.dll'
+  'd3dcompiler_47.dll',
+  'msvcp120.dll',
+  'msvcr120.dll',
+  'vccorlib120.dll'
 ])
 add_native_module('bacon/windows64', [
   'Bacon.dll',
   'libEGL.dll',
   'libGLESv2.dll',
-  'd3dcompiler_46.dll',
-  'msvcp110.dll',
-  'msvcr110.dll',
-  'vccorlib110.dll'
+  'd3dcompiler_47.dll',
+  'msvcp120.dll',
+  'msvcr120.dll',
+  'vccorlib120.dll'
 ])
 add_native_module('bacon/darwin32', [
   'Bacon.dylib'
@@ -63,7 +63,7 @@ if __name__ == '__main__':
           author_email='alex.holkner@gmail.com',
           url='https://github.com/aholkner/bacon',
           packages=[
-            'bacon', 
+            'bacon',
             'bacon.windows32',
             'bacon.windows64',
             'bacon.darwin32',
