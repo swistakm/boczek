@@ -13,4 +13,4 @@ copy %OutDir%\libEGL.pdb %NativeDir%
 copy %OutDir%\libGLESv2.dll %NativeDir%
 copy %OutDir%\libGLESv2.pdb %NativeDir%
 copy %VCInstallDirRedist%\*.dll %NativeDir%
-copy %FrameworkSdkDirRedist%\D3DCompiler_46.dll %NativeDir%
+copy %FrameworkSdkDirRedist%\*.dll %NativeDir%
