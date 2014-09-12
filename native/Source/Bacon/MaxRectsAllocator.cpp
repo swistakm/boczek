@@ -1,5 +1,7 @@
 #include "MaxRectsAllocator.h"
 
+#include <algorithm>
+
 namespace Bacon
 {
 	static const int MinimimFreeRectSize = 8;
