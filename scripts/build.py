@@ -40,14 +40,16 @@ def build_windows():
         'C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe',
         'Bacon.sln',
         '/p:Configuration=Release',
-        '/p:Platform=Win32'
+        '/p:Platform=Win32',
+        '/p:VisualStudioVersion=12.0',
         ],
         cwd=os.path.join(base_dir, 'native/Projects/VisualStudio'))
     subprocess.call([
         'C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe',
         'Bacon.sln',
         '/p:Configuration=Release',
-        '/p:Platform=x64'
+        '/p:Platform=x64',
+        '/p:VisualStudioVersion=12.0',
         ],
         cwd=os.path.join(base_dir, 'native/Projects/VisualStudio'))
 
@@ -175,7 +177,7 @@ if __name__ == '__main__':
         )
 
     commit = get_master_commit(check_clean=args.mode == DIST)
-    # todo: get tid of this global variable in future
+    # todo: get rid of this global variable in future
     share_path = os.path.join(dropbox_dir, 'bacon-%s/%s/' % (version, commit))
 
     print('Version %s' % version)
