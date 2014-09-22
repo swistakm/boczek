@@ -1,8 +1,8 @@
-# Bacon
+# Boczek
 
-*Bacon* is a Python package for making 2D games that run on Windows and OS X.  It provides functions for drawing graphics, playing sounds, and receiving input from the mouse, keyboard and game controllers.
+*Boczek* (IPA: [ˈbɔʧ̑ɛk], AS: [boček]) is a drop-in replacement fot *Bacon* - a Python package for making 2D games that run on Windows and OS X.  It provides functions for drawing graphics, playing sounds, and receiving input from the mouse, keyboard and game controllers.
 
-Here is a simple example of a complete Bacon game::
+Here is a simple example of a complete Boczek game::
 
 ```python
 import bacon
